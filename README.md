@@ -1,10 +1,23 @@
 # tp-job-advertisements Project
 
+## The Team
+
+- Mehdi SEDDIKI - mehdi.seddiki
+- Valentin THIRON - valentin.thiron
+- Paul RADIC - paul.radic
+- Alexia BECOUZE - alexia.becouze
+
+## The Project
+
+*TODO*
+
+## Quarkus
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-## Running the application in dev mode
+### Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
 
@@ -14,7 +27,7 @@ You can run your application in dev mode that enables live coding using:
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
-## Packaging and running the application
+### Packaging and running the application
 
 The application can be packaged using:
 
@@ -33,7 +46,7 @@ If you want to build an _über-jar_, execute the following command:
 
 The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-## Creating a native executable
+### Creating a native executable
 
 You can create a native executable using:
 
@@ -52,9 +65,9 @@ You can then execute your native executable with: `./target/tp-job-advertisement
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html
 .
 
-## Provided Code
+### Provided Code
 
-### RESTEasy JAX-RS
+#### RESTEasy JAX-RS
 
 Easily start your RESTful Web Services
 
