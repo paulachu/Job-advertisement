@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -41,7 +42,42 @@ public class MissionService implements MissionServiceInterface {
 
     @Override
     public List<MissionEntity> searchMission(String search) {
-        return null;
+        var missionModelList = missionRepository.listAll();
+
+        var keywords = search.split(" ");
+
+        Map<MissionModel, Float> missionScoreMap = new HashMap<>();
+
+        for (var item : missionModelList) {
+            var occurrenceFoundWords = 0;
+            var nbFoundWords = 0;
+            for (var keyword : keywords) {
+                var tmp = occurrenceFoundWords;
+                occurrenceFoundWords += item.getJob().toLowerCase(Locale.ROOT).split(keyword.toLowerCase(Locale.ROOT), -1).length - 1;
+                occurrenceFoundWords += item.getContext().toLowerCase(Locale.ROOT).split(keyword.toLowerCase(Locale.ROOT), -1).length - 1;
+                occurrenceFoundWords += item.getDescription().toLowerCase(Locale.ROOT).split(keyword.toLowerCase(Locale.ROOT), -1).length - 1;
+                if (occurrenceFoundWords > tmp) {
+                    nbFoundWords += 1;
+                }
+            }
+
+            if (occurrenceFoundWords == 0) {
+                continue;
+            }
+
+            var totalNbKeywords = keywords.length;
+            missionScoreMap.put(item, nbFoundWords * occurrenceFoundWords - totalNbKeywords * 0.5f * occurrenceFoundWords);
+        }
+
+        var sortedMissionEntityList = missionScoreMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .map(entry -> missionModelToMissionEntityConverter.convert(entry.getKey()))
+                .collect(Collectors.toList());
+
+        Collections.reverse(sortedMissionEntityList);
+
+        return sortedMissionEntityList;
     }
 
     @Transactional
