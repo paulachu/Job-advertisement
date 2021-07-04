@@ -30,7 +30,7 @@ public class MissionService implements MissionServiceInterface {
 
     public List<MissionEntity> findAllMission() {
         var missionModelList = missionRepository.listAll().stream()
-                                .sorted((m1, m2) -> (int) (m1.getId() - m2.getId())).collect(Collectors.toList());
+                                .sorted((m1, m2) -> (int) (m2.getId() - m1.getId())).collect(Collectors.toList());
         return missionModelToMissionEntityConverter.convertList(missionModelList);
     }
 
