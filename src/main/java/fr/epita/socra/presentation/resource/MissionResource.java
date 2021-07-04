@@ -77,4 +77,18 @@ public class MissionResource {
         return Response.status(Response.Status.ACCEPTED)
                 .entity(missionEntityToUpdateMissionResponse.convert(mission)).build();
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response createMission(CreateMissionRequest missionToCreate)
+    {
+        MissionEntity mission = missionService.createMission(createMissionRequestToMissionEntity.convert(missionToCreate));
+        if (mission == null)
+        {
+            return Response.status(Response.Status.NOT_MODIFIED).build();
+        }
+        return Response.status(Response.Status.CREATED)
+                .entity(missionEntityToCreateMissionResponse.convert(mission)).build();
+    }
 }
