@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @With
+@EqualsAndHashCode
 public class CreateMissionRequest {
     @NotNull
     private String location;

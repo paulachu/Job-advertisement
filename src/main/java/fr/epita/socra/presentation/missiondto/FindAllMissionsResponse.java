@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @With
+@EqualsAndHashCode
 public class FindAllMissionsResponse {
     @NotNull
     private String location;

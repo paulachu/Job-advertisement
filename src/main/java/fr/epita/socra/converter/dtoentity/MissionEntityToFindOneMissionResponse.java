@@ -11,6 +11,15 @@ public class MissionEntityToFindOneMissionResponse implements Converter<MissionE
 
     @Override
     public FindOneMissionResponse convertNotNull(MissionEntity from) {
-        return null;
+        return new FindOneMissionResponse(
+                from.location(),
+                from.duration(),
+                from.price(),
+                from.remote(),
+                from.beginning(),
+                from.job(),
+                from.context(),
+                from.description()
+        );
     }
 }
