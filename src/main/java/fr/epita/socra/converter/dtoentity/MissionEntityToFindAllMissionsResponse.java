@@ -10,6 +10,15 @@ import javax.enterprise.context.ApplicationScoped;
 public class MissionEntityToFindAllMissionsResponse implements Converter<MissionEntity, FindAllMissionsResponse> {
     @Override
     public FindAllMissionsResponse convertNotNull(MissionEntity from) {
-        return null;
+        return new FindAllMissionsResponse(
+                from.location(),
+                from.duration(),
+                from.price(),
+                from.remote(),
+                from.beginning(),
+                from.job(),
+                from.context(),
+                from.description()
+        );
     }
 }
