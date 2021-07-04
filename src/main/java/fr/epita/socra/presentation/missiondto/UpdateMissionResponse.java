@@ -1,2 +1,4 @@
-package fr.epita.socra.presentation.missiondto;public class UpdateMissionResponse {
+package fr.epita.socra.presentation.missiondto;
+
+public class UpdateMissionResponse {
 }

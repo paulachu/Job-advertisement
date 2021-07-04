@@ -1,2 +1,11 @@
-package fr.epita.socra.presentation.missiondto;public class FindOneMissionResponse {
+package fr.epita.socra.presentation.missiondto;
+
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@With
+public class FindOneMissionResponse {
 }
