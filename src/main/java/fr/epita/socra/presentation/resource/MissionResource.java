@@ -56,4 +56,11 @@ public class MissionResource {
         return Response.status(Response.Status.OK)
                 .entity(missionEntityToFindOneMissionResponse.convert(mission)).build();
     }
+
+    @GET
+    @Path("search/{search}")
+    public List<SearchMissionResponse> searchMissions(@PathParam("search") String search)
+    {
+        return missionEntityToSearchMissionResponse.convertList(missionService.searchMission(search));
+    }
 }
