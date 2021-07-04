@@ -18,6 +18,7 @@ import java.util.Date;
 @Setter
 @Getter
 @With
+@EqualsAndHashCode
 public class MissionModel extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
