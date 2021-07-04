@@ -71,6 +71,7 @@ public class MissionService implements MissionServiceInterface {
 
         var sortedMissionEntityList = missionScoreMap.entrySet()
                 .stream()
+                .sorted(Map.Entry.comparingByKey())
                 .sorted(Map.Entry.comparingByValue())
                 .map(entry -> missionModelToMissionEntityConverter.convert(entry.getKey()))
                 .collect(Collectors.toList());

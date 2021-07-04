@@ -19,7 +19,7 @@ import java.util.Date;
 @Getter
 @With
 @EqualsAndHashCode
-public class MissionModel extends PanacheEntityBase {
+public class MissionModel extends PanacheEntityBase implements Comparable<MissionModel> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -55,4 +55,9 @@ public class MissionModel extends PanacheEntityBase {
     @NotEmpty
     @Column(nullable = false)
     private String description;
+
+    @Override
+    public int compareTo(MissionModel missionModel) {
+        return Float.compare(this.id, missionModel.id);
+    }
 }

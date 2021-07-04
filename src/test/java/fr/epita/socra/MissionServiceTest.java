@@ -221,10 +221,10 @@ class MissionServiceTest {
                 missionListMock.get(4),
                 missionListMock.get(1),
                 missionListMock.get(3),
-                missionListMock.get(0),
                 missionListMock.get(8),
+                missionListMock.get(5),
                 missionListMock.get(2),
-                missionListMock.get(5)
+                missionListMock.get(0)
         );
         assertEquals(expected, res);
     }
