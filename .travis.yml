@@ -1,0 +1,33 @@
+dist: xenial
+sudo: true
+os: linux
+language: java
+services:
+  - docker
+  - postgresql
+install:
+  - sudo apt-get install -yq --no-install-suggests --no-install-recommends postgresql-common
+  - sudo service postgresql stop
+  - sudo apt install -yq --no-install-suggests --no-install-recommends postgresql-12 postgresql-client-12
+  - sudo service postgresql start 12
+before_script:
+  - psql -c 'create database jobadvertisement;' -U postgres
+jdk:
+  - oraclejdk16
+before_install:
+  - chmod +x mvnw
+cache:
+  directories:
+    - "$HOME/.m2/repository"
+script:
+  - sudo ./mvnw package
+
+notifications:
+  email:
+    recipients:
+      - alexia.becouze@epita.fr
+      - paul.radic@epita.fr
+      - mehdi.seddiki@epita.fr
+      - valentin.thiron@epita.fr
+    on_success: change
+    on_failure: always
