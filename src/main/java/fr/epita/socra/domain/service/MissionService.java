@@ -44,9 +44,20 @@ public class MissionService implements MissionServiceInterface {
         return null;
     }
 
+    @Transactional
     @Override
     public MissionEntity createMission(MissionEntity mission) {
-        return null;
+        if (mission.remote() > 1.0f || mission.remote() < 0.0f)
+        {
+            return null;
+        }
+        MissionModel missionModel = missionEntityToMissionEntityModelConverter.convert(mission);
+        missionRepository.persist(missionModel);
+        if (missionModel == null)
+        {
+            return null;
+        }
+        return missionModelToMissionEntityConverter.convert(missionModel);
     }
 
     @Transactional
