@@ -215,7 +215,7 @@ public class ConverterTest {
     @Test
     public void CheckMissionEntityToMissionModel()
     {
-        var id = 2;
+        var id = 0;
         var location = "Paris";
         var duration = 3;
         var price = 1025;
