@@ -200,6 +200,46 @@ class MissionServiceTest {
 
     @Order(4)
     @Test
+    public void checkSearchMissionEasy() {
+        String toSearch = "Java";
+        var res = missionService.searchMission(toSearch);
+        var expected = List.of(
+                missionListMock.get(7),
+                missionListMock.get(8),
+                missionListMock.get(1)
+        );
+        assertEquals(expected, res);
+    }
+
+    @Order(5)
+    @Test
+    public void checkSearchMissionComplex() {
+        String toSearch = "Développeur application";
+        var res = missionService.searchMission(toSearch);
+        var expected = List.of(
+                missionListMock.get(7),
+                missionListMock.get(4),
+                missionListMock.get(1),
+                missionListMock.get(3),
+                missionListMock.get(0),
+                missionListMock.get(8),
+                missionListMock.get(2),
+                missionListMock.get(5)
+        );
+        assertEquals(expected, res);
+    }
+
+    @Order(6)
+    @Test
+    public void checkSearchMissionDoesntExist() {
+        String toSearch = "jen'existepas";
+        var res = missionService.searchMission(toSearch);
+        List<MissionEntity> expected = new ArrayList<>();
+        assertEquals(expected, res);
+    }
+
+    @Order(7)
+    @Test
     void checkUpdateMissionNotFound() {
         var id = -1;
         var location = "Marseille";
@@ -214,7 +254,7 @@ class MissionServiceTest {
 
         assertNull(missionService.updateMission(missionEntity));
     }
-    @Order(5)
+    @Order(8)
     @Test
     void checkUpdateMissionFound() {
         var id = 9;
@@ -230,7 +270,7 @@ class MissionServiceTest {
 
         assertEquals(missionEntity, missionService.updateMission(missionEntity));
     }
-    @Order(6)
+    @Order(9)
     @Test
     void checkCreateMissionSuccess() {
         var location = "Montreux";
@@ -245,7 +285,7 @@ class MissionServiceTest {
 
         assertEquals(missionEntity, missionService.createMission(missionEntity));
     }
-    @Order(7)
+    @Order(10)
     @Test
     void checkCreateMissionFailureNoJob() {
         var location = "Montreux";
@@ -260,7 +300,7 @@ class MissionServiceTest {
                 missionService.createMission(missionEntity)
         );
     }
-    @Order(8)
+    @Order(11)
     @Test
     void checkCreateMissionFailureNoContext() {
         var location = "Montreux";
@@ -276,7 +316,7 @@ class MissionServiceTest {
                 missionService.createMission(missionEntity)
         );
     }
-    @Order(9)
+    @Order(12)
     @Test
     void checkCreateMissionFailureNoDescription() {
         var location = "Montreux";
@@ -291,7 +331,7 @@ class MissionServiceTest {
                 missionService.createMission(missionEntity)
         );
     }
-    @Order(10)
+    @Order(13)
     @Test
     void checkCreateMissionFailureRemoteGreaterThanOne() {
         var location = "Montreux";
@@ -305,7 +345,7 @@ class MissionServiceTest {
         var missionEntity = new MissionEntity(-1, location, duration, price, remote, beginning, job, context, description);
         assertNull(missionService.createMission(missionEntity));
     }
-    @Order(11)
+    @Order(14)
     @Test
     void checkCreateMissionFailureRemoteLowerThanZero() {
         var location = "Montreux";
