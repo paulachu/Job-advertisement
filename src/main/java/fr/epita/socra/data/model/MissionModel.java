@@ -32,8 +32,7 @@ public class MissionModel extends PanacheEntityBase {
     @Column(nullable = false)
     private int duration;
 
-    @Nullable
-    @Column(nullable = true)
+    @Column(nullable = false)
     private int price;
 
     @Column(nullable = false)
