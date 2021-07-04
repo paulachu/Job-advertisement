@@ -5,6 +5,7 @@ import fr.epita.socra.domain.entity.MissionEntity;
 import fr.epita.socra.domain.service.MissionServiceInterface;
 import fr.epita.socra.presentation.missiondto.*;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -62,5 +63,18 @@ public class MissionResource {
     public List<SearchMissionResponse> searchMissions(@PathParam("search") String search)
     {
         return missionEntityToSearchMissionResponse.convertList(missionService.searchMission(search));
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response updateMission(UpdateMissionRequest missionToUpdate)
+    {
+        MissionEntity mission = missionService.updateMission(updateMissionRequestToMissionEntity.convert(missionToUpdate));
+        if (mission == null) {
+            return Response.status(Response.Status.NOT_MODIFIED).entity("").build();
+        }
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(missionEntityToUpdateMissionResponse.convert(mission)).build();
     }
 }
