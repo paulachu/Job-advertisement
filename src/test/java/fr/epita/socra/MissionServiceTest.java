@@ -219,16 +219,63 @@ class MissionServiceTest {
         Collections.sort(missionListMock, (m1, m2) -> (int) (m1.id() - m2.id()));
         assertEquals(missionListMock, res);
     }
+
     @Test
     void checkFindOneMisisonFound()
     {
         var res = missionService.findOneMission(1l);
         assertEquals(missionListMock.get(0), res);
     }
+
     @Test
     void checkFindOneMisisonNotFound()
     {
         var res = missionService.findOneMission(11l);
         assertNull(res);
+    }
+
+    @Test
+    void checkUpdateMissionNotFound()
+    {
+        var id = -1;
+        var location = "Marseille";
+        var duration = 6;
+        var price = 1;
+        var remote = 0.0f;
+        Date beginning = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            beginning = formatter.parse("2022-06-23");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        var job = "Stagiaire chargée de communication";
+        var context = "Afin de redorer son image, l'entreprise Harmoniks a besoin d'une personne chargée de communication";
+        var description = "L'entreprise Harmoniks ayant connu une année catastrophique, elle cherche à redorer son image. Une campagne publicitaire est déjà prévue. Cependant, aucune communication digitale n'est actuellement faite.";
+        var missionEntity = new MissionEntity(id, location, duration, price, remote, beginning, job, context, description);
+
+        assertNull(missionService.updateMission(missionEntity));
+    }
+    @Test
+    void checkUpdateMissionFound()
+    {
+        var id = 9;
+        var location = "Montreuil";
+        var duration = 12;
+        var price = 75000;
+        var remote = 0.25f;
+        Date beginning = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            beginning = formatter.parse("2021-05-19");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        var job = "Formateur moteur de jeu";
+        var context = "Afin d'améliorer les compétences de leurs équipes, l'entreprise Ubisoft recherche un formateur";
+        var description = "Pour développer les compétences de leurs équipes, l'entreprise Ubisoft recherche un formateur experimenté dans les moteurs de jeu. Une première formation consistera à expliquer aux développeurs comment exécuter une testsuite";
+        var missionEntity = new MissionEntity(id, location, duration, price, remote, beginning, job, context, description);
+
+        assertEquals(missionEntity, missionService.updateMission(missionEntity));
     }
 }
