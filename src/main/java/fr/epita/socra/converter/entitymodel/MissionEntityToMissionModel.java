@@ -10,16 +10,15 @@ import javax.enterprise.context.ApplicationScoped;
 public class MissionEntityToMissionModel implements Converter<MissionEntity, MissionModel> {
     @Override
     public MissionModel convertNotNull(MissionEntity from) {
-        return new MissionModel(
-                from.id(),
-                from.location(),
-                from.duration(),
-                from.price(),
-                from.remote(),
-                from.beginning(),
-                from.job(),
-                from.context(),
-                from.description()
-        );
+        var res = new MissionModel();
+        res.setLocation(from.location());
+        res.setDescription(from.description());
+        res.setContext(from.context());
+        res.setJob(from.job());
+        res.setDuration(from.duration());
+        res.setPrice(from.price());
+        res.setRemote(from.remote());
+        res.setBeginning(from.beginning());
+        return res;
     }
 }

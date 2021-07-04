@@ -1,7 +1,6 @@
 package fr.epita.socra.presentation.missiondto;
 
 import io.smallrye.common.constraint.NotNull;
-import io.smallrye.common.constraint.Nullable;
 import lombok.*;
 
 import javax.validation.constraints.Max;
@@ -25,7 +24,7 @@ public class UpdateMissionRequest {
     @NotNull
     private int duration;
 
-    @Nullable
+    @NotNull
     private int price;
 
     @Min(value = 0, message = "Remote should not be negative")
