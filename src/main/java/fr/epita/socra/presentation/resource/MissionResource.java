@@ -7,6 +7,7 @@ import fr.epita.socra.presentation.missiondto.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("mission")
@@ -42,5 +43,17 @@ public class MissionResource {
     @GET
     public List<FindAllMissionsResponse> findAllMissions() {
         return missionEntityToFindAllMissionsResponse.convertList(missionService.findAllMission());
+    }
+    @GET
+    @Path("{missionId}")
+    public Response findOneMission(@PathParam("missionId") long missionId)
+    {
+        MissionEntity mission =  missionService.findOneMission(missionId);
+        if (mission == null)
+        {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        return Response.status(Response.Status.OK)
+                .entity(missionEntityToFindOneMissionResponse.convert(mission)).build();
     }
 }
