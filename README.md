@@ -9,7 +9,44 @@
 
 ## The Project
 
-*TODO*
+### Project tools and requirements
+
+This project was built using:
+- ``Java`` 16
+- ``maven`` 3.6.3 (at least)
+- ``Quarkus``
+- ``PostgreSQL``
+- ``docker-compose``
+- ``Github`` along with Travis for Continuous Integration
+- ``Swagger``
+
+### Description
+
+The aim of this project is to ease the process of publishing a service online.
+Our product is a REST API that allows users to create, update or search such
+services. Each service is composed of a number of fields, among other things the
+job description, the price or the location of the job.
+
+From a developper perspective, we built our product using best practices:
+- we opted for a layered architecture, composed of a presentation layer, a
+  business layer also known as service and a repository layer managing the data;
+- we usually build our solution step by step, first by writing unit tests, then
+  implementing our different features;
+- we tried to make each layer impermeable by using converters;
+- we used ``Lombok`` to avoid writing boilerplate code (such as constructors,
+  getters, setters...);
+- we used ``javax.validation`` to add constraints on objects' properties.
+
+### Building the project
+
+You can build the project from the command line by using:
+
+    42sh mvn package
+
+Don't forget to modify the ``application.properties`` file in the ``resources``
+folder to configure the connection to your ``PostgreSQL`` database. A script to
+initialize the database using example values is also available in the
+``resources`` directory.
 
 ## Quarkus
 
