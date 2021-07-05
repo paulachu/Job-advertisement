@@ -9,11 +9,14 @@ import fr.epita.socra.domain.entity.MissionEntity;
 import fr.epita.socra.presentation.missiondto.*;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.PersistenceException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConverterTest {
     @Test
@@ -32,9 +35,9 @@ public class ConverterTest {
         var job = "JEE Developer";
         var context = "In a developing team.";
         var description = "The goal is to make a REST API to retrieve personal data.";
-
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         CreateMissionRequest createMissionRequest = new CreateMissionRequest(
-                location, duration, price, remote, beginning, job, context, description
+                location, duration, price, remote, "2021-08-12", job, context, description
         );
 
         CreateMissionRequestToMissionEntity createMissionRequestToMissionEntity = new CreateMissionRequestToMissionEntity();
@@ -185,7 +188,7 @@ public class ConverterTest {
     }
 
     @Test
-    public void CheckUpdateRequestToMissionEntity() {
+    public void CheckUpdateRequestToMissionEntitySuccess() {
         var id = 2;
         var location = "Paris";
         var duration = 3;
@@ -201,8 +204,7 @@ public class ConverterTest {
         var job = "JEE Developer";
         var context = "In a developing team.";
         var description = "The goal is to make a REST API to retrieve personal data.";
-
-        UpdateMissionRequest updateMissionRequest = new UpdateMissionRequest(id, location, duration, price, remote, beginning, job, context, description);
+        UpdateMissionRequest updateMissionRequest = new UpdateMissionRequest(id, location, duration, price, remote, formatter.format(beginning), job, context, description);
 
         UpdateMissionRequestToMissionEntity updateMissionRequestToMissionEntity = new UpdateMissionRequestToMissionEntity();
         var res = updateMissionRequestToMissionEntity.convertNotNull(updateMissionRequest);
