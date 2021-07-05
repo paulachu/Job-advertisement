@@ -32,7 +32,7 @@ public class UpdateMissionRequest {
     private float remote;
 
     @NotNull
-    private Date beginning;
+    private String beginning;
 
     @NotEmpty
     private String job;
