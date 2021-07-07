@@ -182,7 +182,7 @@ class MissionServiceTest {
     @Test
     void checkFindAllMissions() {
         var res = missionService.findAllMission();
-        Collections.sort(missionListMock, (m1, m2) -> (int) (m1.id() - m2.id()));
+        Collections.sort(missionListMock, (m1, m2) -> (int) (m2.id() - m1.id()));
         assertEquals(missionListMock, res);
     }
     @Order(2)
